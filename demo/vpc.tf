@@ -27,3 +27,9 @@ resource "aws_subnet" "demo_private_subnet1" {
     Name = "SUBNET-DEMO-PRIVATE-1"
   }
 }
+
+resource "aws_internet_gateway" "igw-demo" {
+  tags = {
+    Name = "IGW-DEMO"
+  }  
+}
