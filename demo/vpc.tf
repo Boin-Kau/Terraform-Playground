@@ -53,3 +53,44 @@ resource "aws_nat_gateway" "nat_gateway_demo" {
     Name = "NAT-GW-DEMO"
   }
 }
+
+resource "aws_route_table" "rtb_public" {
+  vpc_id = aws_vpc.vpc_demo.id
+
+  tags = {
+    Name = "RTB-DEMO-PUBLIC"
+  }
+  
+}
+
+resource "aws_route_table_association" "rtb_association_public" {
+  subnet_id = aws_subnet.demo_public_subnet1.id
+  route_table_id = aws_route_table.rtb_public.id
+}
+
+resource "aws_route_table" "rtb_private" {
+  vpc_id = aws_vpc.vpc_demo.id
+
+  tags = {
+    Name = "RTB-DEMO-PRIVATE"
+  } 
+}
+
+resource "aws_route_table_association" "rtb_association_private" {
+  subnet_id = aws_subnet.demo_private_subnet1.id
+  route_table_id = aws_route_table.rtb_private.id
+}
+
+resource "aws_route" "public_nat" {
+  route_table_id = aws_route_table.rtb_public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw_demo.id
+  
+}
+
+resource "aws_route" "private_nat" {
+  route_table_id = aws_route_table.rtb_private.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat_gateway_demo.id
+  
+}
