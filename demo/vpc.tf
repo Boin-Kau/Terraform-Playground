@@ -28,8 +28,28 @@ resource "aws_subnet" "demo_private_subnet1" {
   }
 }
 
-resource "aws_internet_gateway" "igw-demo" {
+resource "aws_internet_gateway" "igw_demo" {
+  vpc_id = aws_vpc.vpc_demo.id
+
   tags = {
     Name = "IGW-DEMO"
   }  
+}
+
+resource "aws_eip" "eip_nat_demo" {
+  vpc = true
+  
+  lifecycle {
+    create_before_destroy = true
+  } 
+}
+
+resource "aws_nat_gateway" "nat-gateway_demo" {
+  allocation_id = aws_eip.eip_nat_demo.id
+
+  subnet_id = aws_subnet.demo_public_subnet1.id 
+
+  tags = {
+    Name = "NAT-GW-DEMO"
+  }
 }
