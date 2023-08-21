@@ -44,7 +44,7 @@ resource "aws_eip" "eip_nat_demo" {
   } 
 }
 
-resource "aws_nat_gateway" "nat-gateway_demo" {
+resource "aws_nat_gateway" "nat_gateway_demo" {
   allocation_id = aws_eip.eip_nat_demo.id
 
   subnet_id = aws_subnet.demo_public_subnet1.id 
