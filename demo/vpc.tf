@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_demo" {
 }
 
 resource "aws_subnet" "demo_public_subnet1" {
-    vpc_id = aws_vpc.vpc_demo
+    vpc_id = aws_vpc.vpc_demo.id
     cidr_block = "192.168.1.0/24"
 
     availability_zone = "ap-northeast-2a"
@@ -18,7 +18,7 @@ resource "aws_subnet" "demo_public_subnet1" {
 }
 
 resource "aws_subnet" "demo_private_subnet1" {
-  vpc_id = aws_vpc.vpc_demo
+  vpc_id = aws_vpc.vpc_demo.id
   cidr_block = "192.168.2.0/24"
 
   availability_zone = "ap-northeast-2c"
