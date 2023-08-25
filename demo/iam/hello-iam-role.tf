@@ -40,6 +40,7 @@ resource "aws_iam_role_policy" "hello_s3" {
 
 }
 EOF
+
 }
 
 resource "aws_iam_instance_profile" "hello" {
