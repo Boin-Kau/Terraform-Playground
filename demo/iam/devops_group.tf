@@ -5,7 +5,7 @@ resource "aws_iam_group" "devops_group" {
 resource "aws_iam_group_membership" "devops" {
     name = aws_iam_group.devops_group.name
 
-    user = [
+    users = [
         aws_iam_user.charles.name
     ]
 
