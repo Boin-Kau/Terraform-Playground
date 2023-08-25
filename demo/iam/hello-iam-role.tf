@@ -29,7 +29,7 @@ resource "aws_iam_role_policy" "hello_s3" {
         {
             "Sid" : "AllowAppArtifactsReadAccess",
             "Action" : [
-                "s3:*
+                "s3:*"
             ],
             "Resource" : [
                 "*"
